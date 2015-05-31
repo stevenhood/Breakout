@@ -6,19 +6,27 @@
 const int Breakout::m_iMaxNumObjects = 150;
 const int Breakout::m_iNumRows = 8;
 const int Breakout::m_iNumCols = 10;
+const int Breakout::m_iMaxNumLives = 3;
 
 
 Breakout::Breakout(void)
 	: BaseEngine(m_iMaxNumObjects)
 	, m_State(stateInit)
-	, m_iBricksStartIndex(0)
 {
+	Reset();
 }
 
 
 Breakout::~Breakout(void)
 {
 	// See case SDLK_ESCAPE in KeyDown
+}
+
+
+void Breakout::Reset(void)
+{
+	m_iNumLives = m_iMaxNumLives;
+	m_iScore = 0;
 }
 
 
@@ -32,7 +40,7 @@ int Breakout::InitialiseObjects()
 	for (int i = 0; i < m_iMaxNumObjects; i++)
 		m_ppDisplayableObjects[i] = NULL;
 
-	m_ppDisplayableObjects[0] = m_pRacket = new Racket(this, GetScreenWidth() * 0.5, GetScreenHeight() * 0.95, 0xffffff);
+	m_ppDisplayableObjects[0] = m_pRacket = new Racket(this, GetScreenWidth() * 0.5, GetScreenHeight() * 0.925, 0xffffff);
 	m_ppDisplayableObjects[1] = m_pBall = new Ball(this, GetScreenWidth() * 0.5, GetScreenHeight() * 0.5, m_pRacket);
 	m_iBricksStartIndex = 2;
 	int iLastIndex = SetupBricks(m_iBricksStartIndex);
@@ -58,8 +66,9 @@ int Breakout::SetupBricks(int iIndex)
 {
 	unsigned int auiColours[] = { 0xff0000, 0x00ff00, 0x00000ff };
 	int iNumColours = 3;
-	// Offset from top and bottom of screen
-	int iSideOffset = 10;
+	// Offset from left of screen
+	int iLeftOffset = 10;
+	int iTopOffset = 30;
 
 	int iColour = 0;
 	int iOffset = 10;
@@ -68,10 +77,10 @@ int Breakout::SetupBricks(int iIndex)
 
 	for (int iRow = 0; iRow < m_iNumRows; iRow++)
 	{
-		int iY = (iHeight + iOffset) * iRow + iSideOffset;
+		int iY = (iHeight + iOffset) * iRow + iTopOffset;
 		for (int iCol = 0; iCol < m_iNumCols; iCol++)
 		{
-			int iX = (iWidth + iOffset) * iCol + iSideOffset;
+			int iX = (iWidth + iOffset) * iCol + iLeftOffset;
 			//printf("iX: %d, iY: %d\n", iX, iY);
 			m_ppDisplayableObjects[iIndex++] = new Brick(this, iX, iY, iWidth, iHeight, auiColours[iColour]);
 			iColour = (iColour + 1) % iNumColours;
@@ -99,11 +108,47 @@ void Breakout::GameAction()
 
 	CheckBrickCollisions();
 
+	// Detect ball passing bottom of screen
+	if (m_pBall->GetYCentre() > GetScreenHeight())
+	{
+		m_iNumLives--;
+		if (m_iNumLives <= 0) {
+			GameOver();
+		} else {
+			m_pBall->Reset();
+			printf("Life lost: %d remaining\n", m_iNumLives);
+		}
+	}
+
 	// Redraw screen
 	Redraw(true);
 
 	// Tell all objects to update themselves; call GameRender() on each.
 	UpdateAllObjects(GetTime());
+}
+
+
+void Breakout::GameOver(void)
+{
+	// TODO
+}
+
+
+/* Draw text labels */
+void Breakout::DrawStrings(void)
+{
+	CopyBackgroundPixels(0, GetScreenHeight() * 0.9, GetScreenWidth(), GetScreenHeight() * 0.1);
+
+	char str[32];
+	// Render the score
+	sprintf(str, "Score %d", m_iScore);
+	DrawScreenString(GetScreenWidth() * 0.02, GetScreenHeight() * 0.95, str, 0xffffff, NULL);
+
+	// Render the number of lives
+	sprintf(str, "Lives %d", m_iNumLives);
+	DrawScreenString(GetScreenWidth() * 0.80, GetScreenHeight() * 0.95, str, 0xffffff, NULL);
+
+	SetNextUpdateRect(0, GetScreenHeight() * 0.9, GetScreenWidth(), GetScreenHeight() * 0.1);
 }
 
 
@@ -116,6 +161,7 @@ void Breakout::CheckBrickCollisions(void)
 		{
 			delete m_ppDisplayableObjects[i];
 			m_ppDisplayableObjects[i] = NULL;
+			m_iScore += 10;
 			m_pBall->Bounce();
 			break;
 		}

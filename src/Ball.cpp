@@ -54,19 +54,15 @@ void Ball::DoUpdate(int iCurrentTime)
 	m_iCurrentScreenX += m_dVelocity[0];
 	m_iCurrentScreenY += m_dVelocity[1];
 
-	// Bounce the ball off the top or bottom screen border
+	// Bounce the ball off the top screen border
 	if (m_iCurrentScreenY < 0) {
 		// Change movement to opposite direction
 		m_dVelocity[1] *= -1;
 		m_iCurrentScreenY = 1;
-	} else if (m_iCurrentScreenY >= GetEngine()->GetScreenHeight() - m_iDrawHeight) {
-		m_dVelocity[1] *= -1;
-		m_iCurrentScreenY = GetEngine()->GetScreenHeight() - m_iDrawHeight;
 	}
 
 	// Bounce the ball off the left or right screen border
 	if (m_iCurrentScreenX < 0) {
-		// Change movement to opposite direction
 		m_dVelocity[0] *= -1;
 		m_iCurrentScreenX = 1;
 	} else if (m_iCurrentScreenX >= GetEngine()->GetScreenWidth() - m_iDrawWidth) {
@@ -100,8 +96,8 @@ void Ball::Serve(void)
 
 	// Move upwards towards bricks (-1)
 	int iHeight = GetEngine()->GetScreenHeight();
-	m_dVelocity[1] = -1 * iHeight/48.0 * cos(dAngle);
-	m_dVelocity[0] = iHeight/48.0 * sin(dAngle);
+	m_dVelocity[1] = -1 * iHeight / 48.0 * cos(dAngle);
+	m_dVelocity[0] = iHeight / 48.0 * sin(dAngle);
 }
 
 

@@ -23,15 +23,20 @@ public:
 	void KeyDown(int iKeyCode);
 	void KeyUp(int iKeyCode);
 	void DrawChanges();
+	void DrawStrings(void);
 
 private:
-	static const int m_iMaxNumObjects, m_iNumRows, m_iNumCols;
+	static const int m_iMaxNumObjects, m_iNumRows, m_iNumCols, m_iMaxNumLives;
 	State m_State;
 	Racket *m_pRacket;
 	Ball *m_pBall;
 	int m_iBricksStartIndex;
+	int m_iNumLives;
+	int m_iScore;
 
+	void Reset(void);
 	int SetupBricks(int iIndex);
 	void CheckBrickCollisions(void);
+	void GameOver(void);
 };
 

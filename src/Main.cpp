@@ -9,10 +9,10 @@ int main(int argc, char *argv[])
 {
 	int iResult;
 	Breakout oMain;
+	char buf[64];
+	sprintf(buf, "Breakout");
 
-	char buf[1024];
-	sprintf( buf, "Breakout", BASE_SCREEN_WIDTH, BASE_SCREEN_HEIGHT );
-	iResult = oMain.Initialise( buf, BASE_SCREEN_WIDTH, BASE_SCREEN_HEIGHT, "Cornerstone Regular.ttf", 24 );
+	iResult = oMain.Initialise(buf, BASE_SCREEN_WIDTH, BASE_SCREEN_HEIGHT, "Cornerstone Regular.ttf", 24);
 	iResult = oMain.MainLoop();
 	oMain.Deinitialise();
 

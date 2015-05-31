@@ -1,7 +1,7 @@
 #include "header.h"
 #include "templates.h"
 #include "Breakout.h"
-#include "Misc.h"
+#include "Utils.h"
 
 const int Breakout::m_iMaxNumObjects = 150;
 const int Breakout::m_iNumRows = 8;
@@ -18,6 +18,7 @@ Breakout::Breakout(void)
 
 Breakout::~Breakout(void)
 {
+	// See case SDLK_ESCAPE in KeyDown
 }
 
 
@@ -96,7 +97,7 @@ void Breakout::GameAction()
 	// Don't act for another 30 ticks (approx. 30fps)
 	SetTimeToAct(30);
 
-	CheckBrickCollide();
+	CheckBrickCollisions();
 
 	// Redraw screen
 	Redraw(true);
@@ -106,7 +107,7 @@ void Breakout::GameAction()
 }
 
 
-void Breakout::CheckBrickCollide(void)
+void Breakout::CheckBrickCollisions(void)
 {
 	// TODO what if the whole array is full?
 	for (int i = m_iBricksStartIndex; m_ppDisplayableObjects[i] != NULL; i++)
@@ -115,6 +116,8 @@ void Breakout::CheckBrickCollide(void)
 		{
 			delete m_ppDisplayableObjects[i];
 			m_ppDisplayableObjects[i] = NULL;
+			m_pBall->Bounce();
+			break;
 		}
 	}
 

@@ -32,6 +32,6 @@ private:
 	int m_iBricksStartIndex;
 
 	int SetupBricks(int iIndex);
-	void CheckBrickCollide(void);
+	void CheckBrickCollisions(void);
 };
 

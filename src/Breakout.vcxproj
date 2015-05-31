@@ -97,7 +97,7 @@
     <ClInclude Include="DisplayableObject.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="JPGImage.h" />
-    <ClInclude Include="Misc.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="MovementPosition.h" />
     <ClInclude Include="Racket.h" />
     <ClInclude Include="templates.h" />
@@ -107,12 +107,12 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Breakout.cpp" />
     <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="mainfunction.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="BaseEngine.cpp" />
     <ClCompile Include="DisplayableObject.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="JPGImage.cpp" />
-    <ClCompile Include="Misc.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="TileManager.cpp" />
   </ItemGroup>

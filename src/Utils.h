@@ -1,5 +1,4 @@
 #pragma once
-#include <cmath>
 #include "DisplayableObject.h"
 
 // Check if two DisplayableObjects overlap.

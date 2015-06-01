@@ -1,11 +1,10 @@
+#define _USE_MATH_DEFINES // for M_PI
 #include <cmath> // for cos, sin
 
 #include "header.h"
 #include "templates.h"
 #include "Ball.h"
 #include "Utils.h"
-
-#define M_PI	3.14159265358979323846
 
 Ball::Ball(BaseEngine *pEngine, Racket *pRacket)
 	: DisplayableObject(pEngine)
@@ -21,11 +20,9 @@ Ball::Ball(BaseEngine *pEngine, Racket *pRacket)
 	SetVisible(true);
 }
 
-
 Ball::~Ball(void)
 {
 }
-
 
 // Sets the ball as stationary in the starting position
 void Ball::Reset(void)
@@ -35,7 +32,6 @@ void Ball::Reset(void)
 	m_iCurrentScreenX = m_iPreviousScreenX = m_pRacket->GetXCentre();
 	m_iCurrentScreenY = m_iPreviousScreenY = m_pRacket->GetYCentre() - 20;
 }
-
 
 void Ball::Draw(void)
 {
@@ -51,7 +47,6 @@ void Ball::Draw(void)
 	StoreLastScreenPositionAndUpdateRect();
 }
 
-
 void Ball::DoUpdate(int iCurrentTime)
 {
 	// Move with racket if not served yet
@@ -62,27 +57,32 @@ void Ball::DoUpdate(int iCurrentTime)
 	m_iCurrentScreenY += m_dVelocity[1];
 
 	// Bounce the ball off the top screen border
-	if (m_iCurrentScreenY < 0) {
+	if (m_iCurrentScreenY < 0)
+	{
 		// Change movement to opposite direction
 		m_dVelocity[1] *= -1;
 		m_iCurrentScreenY = 1;
 	}
 
 	// Bounce the ball off the left or right screen border
-	if (m_iCurrentScreenX < 0) {
+	if (m_iCurrentScreenX < 0)
+	{
 		m_dVelocity[0] *= -1;
 		m_iCurrentScreenX = 1;
-	} else if (m_iCurrentScreenX >= GetEngine()->GetScreenWidth() - m_iDrawWidth) {
+	}
+	else if (m_iCurrentScreenX >= GetEngine()->GetScreenWidth() - m_iDrawWidth)
+	{
 		m_dVelocity[0] *= -1;
 		m_iCurrentScreenX = GetEngine()->GetScreenWidth() - m_iDrawWidth;
 	}
 
 	// Detect collision with racket
-	if (IsCollideRect(this, m_pRacket)) {
+	if (IsCollideRect(this, m_pRacket))
+	{
 		// Bounce ball off racket
 		Bounce();
 		// Pass some racket velocity to the ball
-		m_dVelocity[0] += 0.5 * m_pRacket->GetVelocity();
+		m_dVelocity[0] += 0.5 * m_pRacket->GetXVelocity();
 	}
 
 	// Brick collision detection is in Breakout.cpp
@@ -90,19 +90,17 @@ void Ball::DoUpdate(int iCurrentTime)
 	RedrawObjects();
 }
 
-
 void Ball::Serve(void)
 {
-	// Ball must not be moving
+	// If ball is moving, cannot serve
 	if (m_dVelocity[0] != 0 && m_dVelocity[1] != 0)
 		return;
 
 	// Random angle in radians (between 0 and 60 degrees)
-	double dAngle = RandDouble(0, M_PI/3.0);
-	dAngle *= RandParity();
+	double dAngle = RandDouble(0, M_PI / 3.0) * RandParity();
 
-	// Move upwards towards bricks (-1)
 	int iHeight = GetEngine()->GetScreenHeight();
+	// Move upwards towards bricks (-1)
 	m_dVelocity[1] = -1 * iHeight / 48.0 * cos(dAngle);
 	m_dVelocity[0] = iHeight / 48.0 * sin(dAngle);
 }

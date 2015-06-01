@@ -8,7 +8,6 @@ const int Breakout::m_iNumRows = 8;
 const int Breakout::m_iNumCols = 10;
 const int Breakout::m_iMaxNumLives = 3;
 
-
 Breakout::Breakout(void)
 	: BaseEngine(m_iMaxNumObjects)
 	, m_State(stateInit)
@@ -16,19 +15,16 @@ Breakout::Breakout(void)
 	Reset();
 }
 
-
 Breakout::~Breakout(void)
 {
 	// See case SDLK_ESCAPE in KeyDown
 }
-
 
 void Breakout::Reset(void)
 {
 	m_iNumLives = m_iMaxNumLives;
 	m_iScore = 0;
 }
-
 
 int Breakout::InitialiseObjects()
 {
@@ -59,7 +55,6 @@ int Breakout::InitialiseObjects()
 	return 0;
 }
 
-
 int Breakout::SetupBricks(int iIndex)
 {
 	unsigned int auiColours[] = { 0xff0000, 0x00ff00, 0x00000ff };
@@ -89,12 +84,10 @@ int Breakout::SetupBricks(int iIndex)
 	return iIndex;
 }
 
-
 void Breakout::SetupBackgroundBuffer()
 {
 	FillBackground(0x000000);
 }
-
 
 void Breakout::GameAction()
 {
@@ -123,14 +116,12 @@ void Breakout::GameAction()
 	UpdateAllObjects(GetTime());
 }
 
-
 void Breakout::GameOver(void)
 {
 	// TODO
 }
 
-
-void Breakout::DrawStrings(void)
+void Breakout::DrawStrings()
 {
 	CopyBackgroundPixels(0, GetScreenHeight() * 0.9, GetScreenWidth(), GetScreenHeight() * 0.1);
 
@@ -145,7 +136,6 @@ void Breakout::DrawStrings(void)
 
 	SetNextUpdateRect(0, GetScreenHeight() * 0.9, GetScreenWidth(), GetScreenHeight() * 0.1);
 }
-
 
 void Breakout::CheckBrickCollisions(void)
 {
@@ -165,7 +155,6 @@ void Breakout::CheckBrickCollisions(void)
 	// Clean up any NULLs in between object pointers
 	MoveNullsToEnd(m_ppDisplayableObjects, m_iMaxNumObjects);
 }
-
 
 void Breakout::KeyDown(int iKeyCode)
 {
@@ -190,7 +179,6 @@ void Breakout::KeyDown(int iKeyCode)
 		break;
 	}
 }
-
 
 void Breakout::KeyUp(int iKeyCode)
 {

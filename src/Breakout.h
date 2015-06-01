@@ -25,16 +25,14 @@ public:
 	void MouseMoved(int iX, int iY);
 	void MouseUp(int iButton, int iX, int iY);
 	void DrawChanges();
-	void DrawStrings(void);
+	void DrawStrings();
 
 private:
 	static const int m_iMaxNumObjects, m_iNumRows, m_iNumCols, m_iMaxNumLives;
 	State m_State;
 	Racket *m_pRacket;
 	Ball *m_pBall;
-	int m_iBricksStartIndex;
-	int m_iNumLives;
-	int m_iScore;
+	int m_iBricksStartIndex, m_iNumLives, m_iScore;
 
 	void Reset(void);
 	int SetupBricks(int iIndex);

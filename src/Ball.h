@@ -5,12 +5,6 @@
 class Ball :
 	public DisplayableObject
 {
-private:
-	// Two-dimensional velocity vector {x,y} (0 = x, 1 = y)
-	double m_dVelocity[2];
-	Racket *m_pRacket;
-	int m_iStartX, m_iStartY;
-
 public:
 	Ball(BaseEngine *pEngine, Racket *pRacket);
 	~Ball(void);
@@ -26,5 +20,11 @@ public:
 		if (m_dVelocity[0] == 0 && m_dVelocity[1] == 0)
 			m_iCurrentScreenX = iX;
 	}
+
+private:
+	// Two-dimensional velocity vector {x,y} (0 = x, 1 = y)
+	double m_dVelocity[2];
+	Racket *m_pRacket;
+	int m_iStartX, m_iStartY;
 };
 

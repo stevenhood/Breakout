@@ -2,7 +2,6 @@
 #include "templates.h"
 #include "Racket.h"
 
-
 Racket::Racket(BaseEngine *pEngine, int iX, int iY, unsigned int uiColour)
 	: DisplayableObject(pEngine)
 {
@@ -12,17 +11,15 @@ Racket::Racket(BaseEngine *pEngine, int iX, int iY, unsigned int uiColour)
 	m_iDrawWidth = GetEngine()->GetScreenWidth() / 12;
 	m_iDrawHeight = GetEngine()->GetScreenHeight() / 80;
 
-	m_iVelocity = 0;
+	m_iXVelocity = 0;
 	m_uiColour = uiColour;
 
 	SetVisible(true);
 }
 
-
 Racket::~Racket(void)
 {
 }
-
 
 void Racket::Draw(void)
 {
@@ -35,10 +32,9 @@ void Racket::Draw(void)
 	StoreLastScreenPositionAndUpdateRect();
 }
 
-
 void Racket::DoUpdate(int iCurrentTime)
 {
-	m_iCurrentScreenX += m_iVelocity;
+	m_iCurrentScreenX += m_iXVelocity;
 
 	// Prevent the racket from moving off the left and right of the screen
 	if (m_iCurrentScreenX < 0) {
@@ -48,13 +44,12 @@ void Racket::DoUpdate(int iCurrentTime)
 	}
 }
 
-
 void Racket::Left(void)
 {
-	m_iVelocity -= GetEngine()->GetScreenWidth() / 48;
+	m_iXVelocity -= GetEngine()->GetScreenWidth() / 48;
 }
 
 void Racket::Right(void)
 {
-	m_iVelocity += GetEngine()->GetScreenWidth() / 48;
+	m_iXVelocity += GetEngine()->GetScreenWidth() / 48;
 }

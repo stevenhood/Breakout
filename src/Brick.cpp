@@ -2,7 +2,6 @@
 #include "templates.h"
 #include "Brick.h"
 
-
 Brick::Brick(BaseEngine *pEngine, int iX, int iY, int iWidth, int iHeight, unsigned int uiColour)
 	: DisplayableObject(pEngine)
 	, m_uiColour(uiColour)
@@ -19,11 +18,9 @@ Brick::Brick(BaseEngine *pEngine, int iX, int iY, int iWidth, int iHeight, unsig
 	SetVisible(true);
 }
 
-
 Brick::~Brick()
 {
 }
-
 
 void Brick::Draw()
 {

@@ -22,6 +22,8 @@ public:
 	void GameAction();
 	void KeyDown(int iKeyCode);
 	void KeyUp(int iKeyCode);
+	void MouseMoved(int iX, int iY);
+	void MouseUp(int iButton, int iX, int iY);
 	void DrawChanges();
 	void DrawStrings(void);
 

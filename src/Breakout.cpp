@@ -41,7 +41,7 @@ int Breakout::InitialiseObjects()
 		m_ppDisplayableObjects[i] = NULL;
 
 	m_ppDisplayableObjects[0] = m_pRacket = new Racket(this, GetScreenWidth() * 0.5, GetScreenHeight() * 0.925, 0xffffff);
-	m_ppDisplayableObjects[1] = m_pBall = new Ball(this, GetScreenWidth() * 0.5, GetScreenHeight() * 0.5, m_pRacket);
+	m_ppDisplayableObjects[1] = m_pBall = new Ball(this, m_pRacket);
 	m_iBricksStartIndex = 2;
 	int iLastIndex = SetupBricks(m_iBricksStartIndex);
 	m_ppDisplayableObjects[iLastIndex] = NULL;
@@ -50,10 +50,8 @@ int Breakout::InitialiseObjects()
 	{
 	case stateInit:
 		break;
-
 	case stateEnd:
 		break;
-
 	case stateMain:
 		break;
 	}
@@ -112,12 +110,10 @@ void Breakout::GameAction()
 	if (m_pBall->GetYCentre() > GetScreenHeight())
 	{
 		m_iNumLives--;
-		if (m_iNumLives <= 0) {
+		m_pBall->Reset();
+		printf("Life lost: %d remaining\n", m_iNumLives);
+		if (m_iNumLives <= 0)
 			GameOver();
-		} else {
-			m_pBall->Reset();
-			printf("Life lost: %d remaining\n", m_iNumLives);
-		}
 	}
 
 	// Redraw screen
@@ -134,19 +130,18 @@ void Breakout::GameOver(void)
 }
 
 
-/* Draw text labels */
 void Breakout::DrawStrings(void)
 {
 	CopyBackgroundPixels(0, GetScreenHeight() * 0.9, GetScreenWidth(), GetScreenHeight() * 0.1);
 
-	char str[32];
+	char buf[32];
 	// Render the score
-	sprintf(str, "Score %d", m_iScore);
-	DrawScreenString(GetScreenWidth() * 0.02, GetScreenHeight() * 0.95, str, 0xffffff, NULL);
+	sprintf(buf, "Score %d", m_iScore);
+	DrawScreenString(GetScreenWidth() * 0.02, GetScreenHeight() * 0.95, buf, 0xffffff, NULL);
 
 	// Render the number of lives
-	sprintf(str, "Lives %d", m_iNumLives);
-	DrawScreenString(GetScreenWidth() * 0.80, GetScreenHeight() * 0.95, str, 0xffffff, NULL);
+	sprintf(buf, "Lives %d", m_iNumLives);
+	DrawScreenString(GetScreenWidth() * 0.80, GetScreenHeight() * 0.95, buf, 0xffffff, NULL);
 
 	SetNextUpdateRect(0, GetScreenHeight() * 0.9, GetScreenWidth(), GetScreenHeight() * 0.1);
 }
@@ -176,10 +171,15 @@ void Breakout::KeyDown(int iKeyCode)
 {
 	switch (iKeyCode)
 	{
-	case SDLK_LEFT: m_pRacket->Left(); break;
-	case SDLK_RIGHT: m_pRacket->Right(); break;
-	case SDLK_SPACE: m_pBall->Serve(); break;
-
+	case SDLK_LEFT:
+		m_pRacket->Left();
+		break;
+	case SDLK_RIGHT:
+		m_pRacket->Right();
+		break;
+	case SDLK_SPACE:
+		m_pBall->Serve();
+		break;
 	case SDLK_ESCAPE: // End program when escape is pressed
 		// Free array beforehand
 		DrawableObjectsChanged();
@@ -197,17 +197,34 @@ void Breakout::KeyUp(int iKeyCode)
 	switch (iKeyCode)
 	{
 	// Inverse of KeyDown to cancel out velocity when key is released
-	case SDLK_LEFT:	m_pRacket->Right(); break;
-	case SDLK_RIGHT: m_pRacket->Left(); break;
-	default: break;
+	case SDLK_LEFT:
+		m_pRacket->Right();
+		break;
+	case SDLK_RIGHT:
+		m_pRacket->Left();
+		break;
+	default:
+		break;
 	}
 }
 
+void Breakout::MouseMoved(int iX, int iY)
+{
+	m_pRacket->Track(iX);
+}
 
-/*
-Draw the changes to the screen.
-Remove the changing objects, redraw the strings and draw the changing objects again.
-*/
+void Breakout::MouseUp(int iButton, int iX, int iY)
+{
+	switch (iButton)
+	{
+	case SDL_BUTTON_LEFT:
+		m_pBall->Serve();
+		break;
+	default:
+		break;
+	}
+}
+
 void Breakout::DrawChanges()
 {
 	// Remove objects from their old positions

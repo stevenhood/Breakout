@@ -3,7 +3,7 @@
 #include "Racket.h"
 
 
-Racket::Racket(BaseEngine* pEngine, int iX, int iY, unsigned int uiColour)
+Racket::Racket(BaseEngine *pEngine, int iX, int iY, unsigned int uiColour)
 	: DisplayableObject(pEngine)
 {
 	m_iCurrentScreenX = m_iPreviousScreenX = iX;
@@ -57,12 +57,4 @@ void Racket::Left(void)
 void Racket::Right(void)
 {
 	m_iVelocity += GetEngine()->GetScreenWidth() / 48;
-}
-
-
-// Move the object in-place
-void Racket::Move_ip(int iX, int iY)
-{
-	m_iCurrentScreenX += iX;
-	m_iCurrentScreenY += iY;
 }

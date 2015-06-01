@@ -7,30 +7,33 @@
 
 #define M_PI	3.14159265358979323846
 
-Ball::Ball(BaseEngine* pEngine, int iStartX, int iStartY, Racket *pRacket)
+Ball::Ball(BaseEngine *pEngine, Racket *pRacket)
 	: DisplayableObject(pEngine)
+	, m_pRacket(pRacket)
 {
-	// Current and previous coordinates for the object - set them the same initially
-	m_iCurrentScreenX = m_iPreviousScreenX = m_iStartX = iStartX;
-	m_iCurrentScreenY = m_iPreviousScreenY = m_iStartY = iStartY;
-
-	int iBallDiam = GetEngine()->GetScreenHeight()/40;
-	m_iDrawWidth = iBallDiam;
-	m_iDrawHeight = iBallDiam;
-
-	// Initial speed is zero
-	m_dVelocity[0] = 0;
-	m_dVelocity[1] = 0;
-
+	Reset();
+	// Ball diameter
+	int iDiameter = GetEngine()->GetScreenHeight() / 40;
+	m_iDrawWidth = iDiameter;
+	m_iDrawHeight = iDiameter;
+	m_iStartDrawPosX = 0;
+	m_iStartDrawPosY = 0;
 	SetVisible(true);
-
-	// Store Racket for collision check
-	m_pRacket = pRacket;
 }
 
 
 Ball::~Ball(void)
 {
+}
+
+
+// Sets the ball as stationary in the starting position
+void Ball::Reset(void)
+{
+	// Set velocity vector to zero
+	memset(m_dVelocity, 0, sizeof(m_dVelocity));
+	m_iCurrentScreenX = m_iPreviousScreenX = m_pRacket->GetXCentre();
+	m_iCurrentScreenY = m_iPreviousScreenY = m_pRacket->GetYCentre() - 20;
 }
 
 
@@ -51,6 +54,10 @@ void Ball::Draw(void)
 
 void Ball::DoUpdate(int iCurrentTime)
 {
+	// Move with racket if not served yet
+	if (m_dVelocity[0] == 0 && m_dVelocity[1] == 0)
+		m_iCurrentScreenX = m_pRacket->GetXCentre();
+
 	m_iCurrentScreenX += m_dVelocity[0];
 	m_iCurrentScreenY += m_dVelocity[1];
 
@@ -98,14 +105,4 @@ void Ball::Serve(void)
 	int iHeight = GetEngine()->GetScreenHeight();
 	m_dVelocity[1] = -1 * iHeight / 48.0 * cos(dAngle);
 	m_dVelocity[0] = iHeight / 48.0 * sin(dAngle);
-}
-
-
-// Sets the ball as stationary in the starting position
-void Ball::Reset(void)
-{
-	m_iCurrentScreenX = m_iStartX;
-	m_iCurrentScreenY = m_iStartY;
-	// Set velocity to zero
-	memset(m_dVelocity, 0, sizeof(m_dVelocity));
 }

@@ -1,7 +1,13 @@
 #include "header.h"
 #include "templates.h"
+#include "StationaryObject.h"
 #include "Breakout.h"
 #include "Utils.h"
+
+#define COBALT_BLUE 0x002240
+#define RED         0xff0000
+#define GREEN       0x00ff00
+#define BLUE        0x0000ff
 
 const int Breakout::m_iMaxNumObjects = 150;
 const int Breakout::m_iNumRows = 8;
@@ -45,6 +51,7 @@ int Breakout::InitialiseObjects()
 	switch (m_State)
 	{
 	case stateInit:
+		// create menu object here
 		break;
 	case stateEnd:
 		break;
@@ -57,7 +64,7 @@ int Breakout::InitialiseObjects()
 
 int Breakout::SetupBricks(int iIndex)
 {
-	unsigned int auiColours[] = { 0xff0000, 0x00ff00, 0x00000ff };
+	unsigned int auiColours[] = { RED, GREEN, BLUE };
 	int iNumColours = 3;
 	// Offset from left of screen
 	int iLeftOffset = 10;
@@ -86,7 +93,7 @@ int Breakout::SetupBricks(int iIndex)
 
 void Breakout::SetupBackgroundBuffer()
 {
-	FillBackground(0x000000);
+	FillBackground(COBALT_BLUE);
 }
 
 void Breakout::GameAction()

@@ -97,6 +97,7 @@
     <ClInclude Include="DisplayableObject.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="JPGImage.h" />
+    <ClInclude Include="StationaryObject.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="MovementPosition.h" />
     <ClInclude Include="Racket.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="DisplayableObject.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="JPGImage.cpp" />
+    <ClCompile Include="StationaryObject.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="TileManager.cpp" />

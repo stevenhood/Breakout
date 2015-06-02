@@ -11,11 +11,9 @@ public:
 	void DoUpdate(int iCurrentTime);
 	void Left(void);
 	void Right(void);
+	void Track(int iX);
 
-	// Allows the racket to be moved using the mouse
-	void Track(int iX) { m_iCurrentScreenX = iX; }
-
-	int GetXVelocity(void) { return m_iXVelocity; }
+	int GetXVelocity(void) const { return m_iXVelocity; }
 
 private:
 	int m_iXVelocity;

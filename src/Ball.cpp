@@ -57,28 +57,23 @@ void Ball::DoUpdate(int iCurrentTime)
 	m_iCurrentScreenY += m_dVelocity[1];
 
 	// Bounce the ball off the top screen border
-	if (m_iCurrentScreenY < 0)
-	{
+	if (m_iCurrentScreenY < 0) {
 		// Change movement to opposite direction
 		m_dVelocity[1] *= -1;
 		m_iCurrentScreenY = 1;
 	}
 
 	// Bounce the ball off the left or right screen border
-	if (m_iCurrentScreenX < 0)
-	{
+	if (m_iCurrentScreenX < 0) {
 		m_dVelocity[0] *= -1;
 		m_iCurrentScreenX = 1;
-	}
-	else if (m_iCurrentScreenX >= GetEngine()->GetScreenWidth() - m_iDrawWidth)
-	{
+	} else if (m_iCurrentScreenX >= GetEngine()->GetScreenWidth() - m_iDrawWidth) {
 		m_dVelocity[0] *= -1;
 		m_iCurrentScreenX = GetEngine()->GetScreenWidth() - m_iDrawWidth;
 	}
 
 	// Detect collision with racket
-	if (IsCollideRect(this, m_pRacket))
-	{
+	if (IsCollideRect(this, m_pRacket)) {
 		// Bounce ball off racket
 		Bounce();
 		// Pass some racket velocity to the ball

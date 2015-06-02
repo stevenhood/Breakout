@@ -53,3 +53,20 @@ void Racket::Right(void)
 {
 	m_iXVelocity += GetEngine()->GetScreenWidth() / 48;
 }
+
+// Allows the racket to be moved using the mouse
+void Racket::Track(int iX)
+{
+	m_iCurrentScreenX = iX;
+	// Change the racket velocity according to the location of the mouse
+	// NOTE: Need to comment out first line in DoUpdate
+	//if (iX < m_iPreviousScreenX - 5) {
+	//	m_iXVelocity = -(GetEngine()->GetScreenWidth() / 48);
+	//}
+	//else if (iX > m_iPreviousScreenX + 5) {
+	//	m_iXVelocity = GetEngine()->GetScreenWidth() / 48;
+	//}
+	//else {
+	//	m_iXVelocity = 0;
+	//}
+}

@@ -2,7 +2,6 @@
 #include "DisplayableObject.h"
 
 // Check if two DisplayableObjects overlap.
-// Pointers are constant so the objects cannot be changed.
 bool IsCollideRect(DisplayableObject *const rect1, DisplayableObject *const rect2);
 
 // Returns a random double between fMin and fMax - inclusive?

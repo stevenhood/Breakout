@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	char buf[32];
 	sprintf(buf, "Breakout");
 
-	iResult = oMain.Initialise(buf, BASE_SCREEN_WIDTH, BASE_SCREEN_HEIGHT, "Cosmic Alien.ttf", 24);
+	iResult = oMain.Initialise(buf, BASE_SCREEN_WIDTH, BASE_SCREEN_HEIGHT, "../res/fonts/Cosmic Alien.ttf", 24);
 	iResult = oMain.MainLoop();
 	oMain.Deinitialise();
 

@@ -1,6 +1,6 @@
  Breakout
 
- Timestamp is 556d87ba (Tue Jun 02 11:38:50 2015)
+ Timestamp is 556e2bec (Tue Jun 02 23:19:24 2015)
 
  Preferred load address is 00400000
 
@@ -40,9 +40,9 @@
   Address         Publics by Value              Rva+Base       Lib:Object
 
  0000:00000000       __except_list              00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
  0000:00000000       ___guard_flags             00000000     <absolute>
  0000:00000000       ___guard_fids_table        00000000     <absolute>
- 0000:00000000       ___guard_fids_count        00000000     <absolute>
  0000:0000000c       ___safe_se_handler_count   0000000c     <absolute>
  0000:00009876       __fltused                  00009876     <absolute>
  0000:00009876       __ldused                   00009876     <absolute>
@@ -51,8 +51,8 @@
  0001:00000920       _WinMain@16                00401920 f   sdlmain:SDL_win32_main.obj
  0001:00001840       ??0Ball@@QAE@PAVBaseEngine@@PAVRacket@@@Z 00402840 f   Ball.obj
  0001:00001930       ??1Ball@@UAE@XZ            00402930 f   Ball.obj
- 0001:00001960       ??_GBall@@UAEPAXI@Z        00402960 f i Ball.obj
  0001:00001960       ??_EBall@@UAEPAXI@Z        00402960 f i Ball.obj
+ 0001:00001960       ??_GBall@@UAEPAXI@Z        00402960 f i Ball.obj
  0001:000019b0       ?Bounce@Ball@@QAEXXZ       004029b0 f i Ball.obj
  0001:00001a00       ?DoUpdate@Ball@@UAEXH@Z    00402a00 f   Ball.obj
  0001:00001c70       ?Draw@Ball@@UAEXXZ         00402c70 f   Ball.obj
@@ -107,8 +107,8 @@
  0001:000034b0       ??$Swap@N@@YAXAAN0@Z       004044b0 f i BaseEngine.obj
  0001:00003500       ??0BaseEngine@@QAE@H@Z     00404500 f   BaseEngine.obj
  0001:000036a0       ??1BaseEngine@@UAE@XZ      004046a0 f   BaseEngine.obj
- 0001:00003740       ??_GBaseEngine@@UAEPAXI@Z  00404740 f i BaseEngine.obj
  0001:00003740       ??_EBaseEngine@@UAEPAXI@Z  00404740 f i BaseEngine.obj
+ 0001:00003740       ??_GBaseEngine@@UAEPAXI@Z  00404740 f i BaseEngine.obj
  0001:00003790       ?CleanUp@BaseEngine@@UAEXXZ 00404790 f   BaseEngine.obj
  0001:000037b0       ?CopyAllBackgroundBuffer@BaseEngine@@QAEXXZ 004047b0 f   BaseEngine.obj
  0001:000038a0       ?CopyBackgroundPixels@BaseEngine@@QAEXHHHH@Z 004048a0 f   BaseEngine.obj
@@ -182,8 +182,8 @@
  0001:00008530       ??0StationaryObject@@QAE@PAVBaseEngine@@PADHH@Z 00409530 f   StationaryObject.obj
  0001:00008650       ??1ImageData@@QAE@XZ       00409650 f i StationaryObject.obj
  0001:00008690       ??1StationaryObject@@UAE@XZ 00409690 f   StationaryObject.obj
- 0001:00008710       ??_EStationaryObject@@UAEPAXI@Z 00409710 f i StationaryObject.obj
  0001:00008710       ??_GStationaryObject@@UAEPAXI@Z 00409710 f i StationaryObject.obj
+ 0001:00008710       ??_EStationaryObject@@UAEPAXI@Z 00409710 f i StationaryObject.obj
  0001:00008760       ?Draw@StationaryObject@@UAEXXZ 00409760 f   StationaryObject.obj
  0001:000087d0       ?GetHeight@ImageData@@QAEHXZ 004097d0 f i StationaryObject.obj
  0001:000087f0       ?GetWidth@ImageData@@QAEHXZ 004097f0 f i StationaryObject.obj
@@ -196,8 +196,8 @@
  0001:000089e0       ?RandParity@@YAHXZ         004099e0 f   Utils.obj
  0001:00008a30       ??0Racket@@QAE@PAVBaseEngine@@HHI@Z 00409a30 f   Racket.obj
  0001:00008b50       ??1Racket@@UAE@XZ          00409b50 f   Racket.obj
- 0001:00008b80       ??_ERacket@@UAEPAXI@Z      00409b80 f i Racket.obj
  0001:00008b80       ??_GRacket@@UAEPAXI@Z      00409b80 f i Racket.obj
+ 0001:00008b80       ??_ERacket@@UAEPAXI@Z      00409b80 f i Racket.obj
  0001:00008bd0       ?DoUpdate@Racket@@UAEXH@Z  00409bd0 f   Racket.obj
  0001:00008c70       ?Draw@Racket@@UAEXXZ       00409c70 f   Racket.obj
  0001:00008cf0       ?DrawScreenRectangle@BaseEngine@@QAEXHHHHI@Z 00409cf0 f i Racket.obj
@@ -344,8 +344,7 @@
  0002:000008cc       ?m_iNumCols@Breakout@@0HB  0040e8cc     Breakout.obj
  0002:000008d0       ?m_iMaxNumLives@Breakout@@0HB 0040e8d0     Breakout.obj
  0002:000008dc       ??_7Breakout@@6B@          0040e8dc     Breakout.obj
- 0002:00000944       ??_C@_0BJ@IDMMBCPE@Life?5lost?3?5?$CFd?5remaining?6?$AA@ 0040e944     Breakout.obj
- 0002:00000964       ??_C@_08PJKONMNH@Score?5?$CFd?$AA@ 0040e964     Breakout.obj
+ 0002:00000948       ??_C@_08PJKONMNH@Score?5?$CFd?$AA@ 0040e948     Breakout.obj
  0002:00000970       ??_C@_08BICCMEKD@Lives?5?$CFd?$AA@ 0040e970     Breakout.obj
  0002:00000980       __real@3f947ae147ae147b    0040e980     Breakout.obj
  0002:00000990       __real@3fb999999999999a    0040e990     Breakout.obj
@@ -390,6 +389,7 @@
  0002:00000cdc       ??_C@_0BA@KMDNPDDA@WinMain?$CI?$CJ?5error?$AA@ 0040ecdc     sdlmain:SDL_win32_main.obj
  0002:00000cec       ??_C@_09KDGFPKMD@DDRAW?4DLL?$AA@ 0040ecec     sdlmain:SDL_win32_main.obj
  0002:00000cf8       __load_config_used         0040ecf8     MSVCRT:loadcfg.obj
+ 0002:00000d40       ??_C@_0BJ@IDMMBCPE@Life?5lost?3?5?$CFd?5remaining?6?$AA@ 0040ed40     Breakout.obj
  0002:00001030       ??_R4Ball@@6B@             0040f030     Ball.obj
  0002:00001048       ??_R3Ball@@8               0040f048     Ball.obj
  0002:0000105c       ??_R2Ball@@8               0040f05c     Ball.obj

@@ -36,7 +36,7 @@ int Breakout::InitialiseObjects()
 {
 	DrawableObjectsChanged();
 	DestroyOldObjects();
-	m_ppDisplayableObjects = new DisplayableObject*[m_iMaxNumObjects];
+	m_ppDisplayableObjects = new DisplayableObject*[m_iMaxNumObjects + 1];
 
 	// The LAST entry has to be NULL. This is used to work out where the end of the array is.
 	for (int i = 0; i < m_iMaxNumObjects; i++)
@@ -47,6 +47,9 @@ int Breakout::InitialiseObjects()
 	m_iBricksStartIndex = 2;
 	int iLastIndex = SetupBricks(m_iBricksStartIndex);
 	m_ppDisplayableObjects[iLastIndex] = NULL;
+
+	// Racket, Ball and bricks
+	int iNumObjects = 2 + (m_iNumRows * m_iNumCols);
 
 	switch (m_State)
 	{
@@ -59,7 +62,7 @@ int Breakout::InitialiseObjects()
 		break;
 	}
 
-	return 0;
+	return iNumObjects;
 }
 
 int Breakout::SetupBricks(int iIndex)
